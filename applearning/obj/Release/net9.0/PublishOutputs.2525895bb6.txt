@@ -1,0 +1,7 @@
+E:\learningapplication\applearning\bin\publish\applearning.exe
+E:\learningapplication\applearning\bin\publish\appsettings.Development.json
+E:\learningapplication\applearning\bin\publish\appsettings.json
+E:\learningapplication\applearning\bin\publish\applearning.dll
+E:\learningapplication\applearning\bin\publish\applearning.deps.json
+E:\learningapplication\applearning\bin\publish\applearning.runtimeconfig.json
+E:\learningapplication\applearning\bin\publish\applearning.pdb
