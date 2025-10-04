@@ -1,4 +1,4 @@
-name: Build and deploy ASP app to Azure Web App - learningwebapp2668
+name: Build and deploy ASP.NET Core app to Azure Web App - learningwebapp2668
 
 on:
   push:
@@ -15,23 +15,25 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup MSBuild path
-        uses: microsoft/setup-msbuild@v1.0.2
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x' # adjust to your project version
 
-      - name: Setup NuGet
-        uses: NuGet/setup-nuget@v1.0.5
+      - name: Restore dependencies
+        run: dotnet restore applearning/applearning.csproj
 
-      - name: Restore NuGet packages
-        run: nuget restore
+      - name: Build
+        run: dotnet build applearning/applearning.csproj --configuration Release --no-restore
 
-      - name: Publish to folder
-        run: msbuild applearning/applearning.csproj /nologo /verbosity:m /t:Publish /p:PublishDir="published\\"
+      - name: Publish
+        run: dotnet publish applearning/applearning.csproj --configuration Release --output ./published
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: ASP-app
-          path: published
+          path: ./published
 
   deploy:
     runs-on: windows-latest
